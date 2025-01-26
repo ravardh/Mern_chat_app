@@ -1,8 +1,11 @@
 import React from 'react'
+import welcome from "../assests/welcome.gif";
 
 const HomePage = () => {
   return (
-    <div>HomePage</div>
+    <>
+    <img src={welcome} alt="Welcome Banner" className="welcomeImage"/>
+    </>
   )
 }
 

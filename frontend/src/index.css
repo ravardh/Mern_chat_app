@@ -1,1 +1,48 @@
 @import "tailwindcss";
+
+
+:root {
+  --color-bg-light: #FBFBFB;
+  --color-bg-accent: #8bddfb;
+  --color-primary: #7e66f5;
+  --color-secondary:  #305db1;
+}
+
+.bg-light {
+  background-color: var(--color-bg-light);
+}
+.bg-primary {
+  background-color: var(--color-primary);
+}
+.bg-secondary {
+  background-color: var(--color-secondary);
+}
+.bg-accent {
+  background-color: var(--color-bg-accent);
+}
+
+.text-light {
+  color: var(--color-bg-light);
+}
+
+.text-primary {
+  color: var(--color-primary);
+}
+
+.text-secondary {
+  color: var(--color-secondary);
+}
+
+.border-primary {
+  border-color: var(--color-primary);
+}
+
+.border-secondary {
+  border-color: var(--color-secondary);
+}
+
+
+.welcomeImage{
+  height: 80vh;
+  width: 100%;
+}

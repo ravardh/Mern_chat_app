@@ -7,6 +7,7 @@ import UpdatePage from "./pages/updatePic";
 import LogoutPage from "./pages/logout";
 import ChatPage from "./pages/chat";
 import Footer from "./components/footer";
+import ContactUs from "./pages/contactus";
 
 const App = () => {
   return (
@@ -22,6 +23,8 @@ const App = () => {
           <Route path="/update" element={<UpdatePage />} />
           <Route path="/logout" element={<LogoutPage />} />
           <Route path="/chat" element={<ChatPage />} />
+          <Route path="/contact-us" element={<ContactUs />} />
+          
         </Routes>
       </main>
       <footer>
