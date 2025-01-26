@@ -15,3 +15,21 @@ export const getContacts = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getMessages = async (req, res, next) => {
+  try {
+    const { id: usertoChatID } = req.params;
+    const myID = req.user._id;
+
+    const messages = await Message.find({
+      $or: [
+        { senderID: myID, receiverID: usertoChatID },
+        { senderID: usertoChatID, receiverID: myID },
+      ],
+    });
+
+    res.status(200).json(messages);
+  } catch (error) {
+    next(error);
+  }
+};
