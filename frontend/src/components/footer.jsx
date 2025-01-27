@@ -3,29 +3,26 @@ import { NavLink } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className=" bg-primary text-light py-6 sticky bottom-0">
+    <footer className="bg-primary text-light py-6">
       <div className="container mx-auto text-center flex justify-evenly">
-        <h4 className="text-lg font-semibold">My Website</h4>
-        <p className="text-sm mt-2">© 2025 My Website. All Rights Reserved.</p>
+        <h4 className="text-lg font-semibold">Chit Chat</h4>
+        <p className="text-sm mt-2">© 2025 Chit Chat. All Rights Reserved.</p>
         <div className="flex justify-center space-x-4 mt-2">
           <NavLink
-            to="/privacy-policy"
-            className="text-gray-200 hover:text-white transition duration-300"
-            activeClassName="text-white"
+            to="/privacyPolicy"
+            className="text-gray-200 hover:text-green-500 transition duration-300"
           >
             Privacy Policy
           </NavLink>
           <NavLink
-            to="/terms-of-service"
-            className="text-gray-200 hover:text-white transition duration-300"
-            activeClassName="text-white"
+            to="/termsOfService"
+            className="text-gray-200 hover:text-green-500 transition duration-300"
           >
             Terms of Service
           </NavLink>
           <NavLink
-            to="/contact-us"
-            className="text-gray-200 hover:text-white transition duration-300"
-            activeClassName="text-white"
+            to="/contactUs"
+            className="text-gray-200 hover:text-green-500 transition duration-300"
           >
             Contact Us
           </NavLink>

@@ -7,7 +7,9 @@ import UpdatePage from "./pages/updatePic";
 import LogoutPage from "./pages/logout";
 import ChatPage from "./pages/chat";
 import Footer from "./components/footer";
-import ContactUs from "./pages/contactus";
+import ContactUsPage from "./pages/contactus";
+import PrivacyPolicyPage from "./pages/privacypolicy";
+import TermsOfServicePage from "./pages/termofservice";
 
 const App = () => {
   return (
@@ -23,7 +25,9 @@ const App = () => {
           <Route path="/update" element={<UpdatePage />} />
           <Route path="/logout" element={<LogoutPage />} />
           <Route path="/chat" element={<ChatPage />} />
-          <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/privacyPolicy" element={<PrivacyPolicyPage />} />
+          <Route path="/termsOfService" element={<TermsOfServicePage />} />
+          <Route path="/contactUs" element={<ContactUsPage />} />
           
         </Routes>
       </main>

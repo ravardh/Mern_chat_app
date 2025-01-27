@@ -8,7 +8,7 @@ const Navbar = () => {
   return (
     <nav className="bg-light text-primary p-4 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
-        <div className="text-xl font-bold">My Chat App</div>
+        <div className="text-xl font-bold">Chit Chat</div>
         <ul className="flex space-x-4">
           <li>
             <NavLink to="/" className={ActiveClass}>
