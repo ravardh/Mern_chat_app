@@ -7,7 +7,7 @@ const LogoutPage = () => {
 
   const handleLogout = () => {
     // Redirect to login page or home after logout
-    navigate("/");
+    navigate("/login");
   };
 
   return (
