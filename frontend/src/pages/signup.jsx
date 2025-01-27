@@ -1,30 +1,46 @@
-import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import axios from "../lib/axios";
 
 export default function SignupPage() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
+    name: "",
+    email: "",
+    password: "",
     agreedToTerms: false,
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.agreedToTerms) {
-      alert('You must agree to the terms and conditions.');
+      alert("You must agree to the terms and conditions.");
       return;
     }
-    console.log('Form Data:', formData);
-    alert('Signup successful!');
+
+    console.log("Form Data:", formData);
+    try {
+      const response = await axios.post("/api/auth/signup", {
+        fullName: formData.name,
+        email: formData.email,
+        password: formData.password,
+      });
+
+      alert(response.data.message);
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+      alert(error.response.data.message);
+    }
   };
 
   return (
@@ -33,7 +49,10 @@ export default function SignupPage() {
         <h2 className="text-2xl font-bold text-center mb-4">Signup</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
               Name
             </label>
             <input
@@ -49,7 +68,10 @@ export default function SignupPage() {
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
               Email
             </label>
             <input
@@ -65,7 +87,10 @@ export default function SignupPage() {
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
               Password
             </label>
             <input
@@ -90,7 +115,10 @@ export default function SignupPage() {
               className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
             />
             <label htmlFor="terms" className="ml-2 text-sm text-gray-600">
-              I agree to the <NavLink to="/termsOfService" className="text-blue-600 underline">Terms and Conditions</NavLink>
+              I agree to the{" "}
+              <NavLink to="/termsOfService" className="text-blue-600 underline">
+                Terms and Conditions
+              </NavLink>
             </label>
           </div>
 
@@ -102,7 +130,7 @@ export default function SignupPage() {
           </button>
         </form>
         <p className="mt-4 text-center text-sm text-gray-600">
-          Already have an account?{' '}
+          Already have an account?{" "}
           <NavLink to="/login" className="text-blue-600 underline">
             Login
           </NavLink>

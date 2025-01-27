@@ -7,13 +7,14 @@ const LoginPage = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     // Store email in localStorage if Remember Me is checked
     if (rememberMe) {
       localStorage.setItem('email', email);
     }
+
 
     // Example of redirecting after login (you can change '/dashboard' to any route)
     navigate('/dashboard');

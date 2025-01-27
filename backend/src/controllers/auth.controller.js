@@ -39,7 +39,7 @@ export const signup = async (req, res, next) => {
     });
 
     console.log(newUser._id);
-    res.status(201).json({ Message: `Welcome to My Chat App ${fullName}` });
+    res.status(201).json({ message: `Welcome to My Chat App ${fullName}` });
   } catch (error) {
     next(error);
   }
