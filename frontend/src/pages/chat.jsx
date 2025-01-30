@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "../lib/axios";
 import dummy from "../assests/dummyPP.png";
-import { socket } from "../lib/socket";
+
 
 const ChatPage = () => {
   const [selectedChat, setSelectedChat] = useState(null);
