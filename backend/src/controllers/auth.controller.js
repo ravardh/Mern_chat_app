@@ -2,6 +2,9 @@ import User from "../models/user.model.js";
 import bcrypt from "bcrypt";
 import { generateToken } from "../lib/utils.js";
 import cloudinary from "../lib/cloudinary.js";
+import path from "path";
+
+const rootPath  = path.join(process.env.UPLOAD_FILE_PATH,"uploads");
 
 export const signup = async (req, res, next) => {
   const { fullName, email, password } = req.body;
@@ -47,7 +50,7 @@ export const signup = async (req, res, next) => {
 
 export const login = async (req, res, next) => {
   const { email, password } = req.body;
-
+  console.log(req.body)
   try {
     if (!email || !password) {
       const error = new Error("All Feilds Required!!!");
@@ -105,34 +108,46 @@ export const logout = (req, res, next) => {
 
 export const updateDP = async (req, res, next) => {
   try {
-    const profilePic = req.body;
+    console.log("Received file:", req.file); // Log the file to verify multer is working
+    const profilePic = req.file ? `${rootPath}/${req.file.filename}` : null;
     const userID = req.user._id;
 
     if (!profilePic) {
       const error = new Error("Profile pic required");
       error.statusCode = 400;
-      next(error);
+      return next(error);  // Ensure you return after calling next to stop further execution
     }
 
-    const uploadResponse = await cloudinary.uploader(profilePic);
+    console.log("Sending to Cloudinary:", profilePic);  // Check if the profilePic path is correct
+    const uploadResponse = await cloudinary.uploader.upload(profilePic, {
+      folder: "chit_chat_DP",
+    });
+
+    console.log("File uploaded to Cloudinary:", uploadResponse);
 
     await User.findByIdAndUpdate(
       userID,
-      {
-        profilePic: uploadResponse.secure_url,
-      },
+      { profilePic: uploadResponse.secure_url },
       { new: true }
     );
 
-    res.status(200).json({ message: "Profie Picture Uploaded" });
+    console.log("Uploaded to MongoDB");
+    res.status(200).json({ message: "Profile Picture Uploaded" });
   } catch (error) {
+    console.error("Error uploading profile pic:", error); // Log the error for debugging
     next(error);
   }
 };
 
+
 export const checkAuth = (req, res, next) => {
   try {
-    res.status(200).json(req.user);
+    res.status(200).json({
+      _id:req.user._id,
+      email: req.user.email,
+      fullName: req.user.fullName,
+      profilePic: req.user.profilePic,
+    });
   } catch (error) {
     next(error);
   }

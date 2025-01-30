@@ -1,13 +1,20 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "../lib/axios";
 
 const LogoutPage = () => {
   const [showConfirm, setShowConfirm] = useState(false);
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    // Redirect to login page or home after logout
-    navigate("/login");
+  const handleLogout = async () => {
+    try {
+      const response = await axios.post("/api/auth/logout");
+      alert(response.data.message);
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+      alert(error.response.data.message);
+    }
   };
 
   return (
